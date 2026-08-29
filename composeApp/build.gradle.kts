@@ -11,11 +11,11 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.compilerPlugin)
 }
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = libs.versions.project.packageName.get()
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -30,7 +30,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -123,23 +122,6 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
-
-    // KSP Common sourceSet
-    sourceSets.named("commonMain").configure {
-        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-    }
-
-    sourceSets {
-        getByName("iosX64Main") {
-            kotlin.srcDir("build/generated/ksp/iosX64/iosX64Main/kotlin")
-        }
-        getByName("iosArm64Main") {
-            kotlin.srcDir("build/generated/ksp/iosArm64/iosArm64Main/kotlin")
-        }
-        getByName("iosSimulatorArm64Main") {
-            kotlin.srcDir("build/generated/ksp/iosSimulatorArm64/iosSimulatorArm64Main/kotlin")
-        }
-    }
 }
 
 compose.resources {
@@ -185,18 +167,3 @@ compose.desktop {
 dependencies {
     androidRuntimeClasspath(libs.compose.ui.tooling)
 }
-
-// KSP Tasks
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-    add("kspAndroid", libs.koin.ksp.compiler)
-    add("kspIosX64", libs.koin.ksp.compiler)
-    add("kspIosArm64", libs.koin.ksp.compiler)
-    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
-}
-
-// Trigger Common Metadata Generation from Native tasks
-tasks.matching { it.name.startsWith("ksp") && it.name != "kspCommonMainKotlinMetadata" }
-    .configureEach {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }

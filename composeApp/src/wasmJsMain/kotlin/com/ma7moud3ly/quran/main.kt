@@ -6,14 +6,14 @@ import androidx.navigation.ExperimentalBrowserHistoryApi
 import androidx.navigation.bindToBrowserNavigation
 import androidx.navigation.toRoute
 import com.ma7moud3ly.quran.di.AppModule
+import org.koin.plugin.module.dsl.modules
 import kotlinx.browser.document
 import org.koin.core.context.GlobalContext.startKoin
-import org.koin.ksp.generated.module
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalBrowserHistoryApi::class)
 fun main() {
     startKoin {
-        modules(AppModule().module)
+        modules(AppModule::class)
     }
     val body = document.body ?: return
     ComposeViewport(body) {
