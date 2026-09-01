@@ -1,17 +1,16 @@
 name: Build & Release Quran App
 
 on:
-  push:
-    branches:
-      - test
-    tags:
-      - "v*"
   pull_request:
     branches:
-      - test
+      - main
+  # Full multi-platform build + release, only on version tags
+  push:
+    tags:
+      - "v*"
 
 jobs:
-  # ---- Build Android + WASM + Linux desktop ----
+  # ---- Android + Linux desktop + WASM (runs on PRs and on tags) ----
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -59,10 +58,11 @@ jobs:
           name: desktop-linux
           path: composeApp/build/compose/binaries/main-release/deb/*.deb
 
-  # ---- Build Windows desktop ----
+  # ---- Windows desktop (tags only) ----
   build-windows:
     runs-on: windows-latest
     needs: build-linux
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -89,10 +89,11 @@ jobs:
           name: desktop-windows
           path: composeApp/build/compose/binaries/main-release/exe/*.exe
 
-  # ---- Build macOS desktop ----
+  # ---- macOS desktop (tags only) ----
   build-macos:
     runs-on: macos-latest
     needs: build-windows
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -111,7 +112,7 @@ jobs:
           name: desktop-macos
           path: composeApp/build/compose/binaries/main-release/dmg/*.dmg
 
-  # ---- Release ----
+  # ---- Release (tags only) ----
   release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
