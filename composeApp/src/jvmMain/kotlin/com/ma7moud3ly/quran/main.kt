@@ -8,17 +8,17 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.ma7moud3ly.quran.di.AppModule
+import org.koin.plugin.module.dsl.modules
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
-import org.koin.ksp.generated.module
 import com.ma7moud3ly.quran.resources.Res
 import com.ma7moud3ly.quran.resources.app_name
 import com.ma7moud3ly.quran.resources.logo
 
 fun main() = application {
     startKoin {
-        modules(AppModule().module)
+        modules(AppModule::class)
     }
     Window(
         onCloseRequest = ::exitApplication,

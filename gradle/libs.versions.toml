@@ -1,42 +1,41 @@
 [versions]
 #project
-foundation = "1.10.1"
 project-packageName = "com.ma7moud3ly.quran"
 project-vendor = "github.com/Ma7moud3ly"
 project-versionCode = "7"
 project-versionName = "2.0.0" #also update at commonMain/composeResources/values/strings
-android-compileSdk = "36"
+android-compileSdk = "37"
 android-minSdk = "24"
-android-targetSdk = "36"
+android-targetSdk = "37"
 #plugins
-agp = "9.0.1" # https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-compatibility-guide.html
-kotlin = "2.3.10"
-ksp = "2.3.4"
-composeMultiplatform = "1.10.1"
-kotlinSerialization = "2.3.10"
+agp = "9.4.0" #
+kotlin = "2.4.10"
+composeMultiplatform = "1.12.0"
+kotlinSerialization = "2.4.10"
+koinCompilerPlugin = "1.1.0"
 #common
 compose-material3 = "1.9.0"
 compose-material-icons = "1.7.3"
-ktorClientCore = "3.4.0"
-media3Exoplayer = "1.9.2"
-okio = "3.16.4"
-serialization-json = "1.10.0"
-kotlinxDatetime = "0.7.1"
-androidx-lifecycle = "2.9.6"
+foundation = "1.10.1"
+ktorClientCore = "3.5.2"
+media3Exoplayer = "1.11.0"
+okio = "3.18.1"
+serialization-json = "1.11.0"
+kotlinxDatetime = "0.8.0"
+androidx-lifecycle = "2.11.0"
 androidx-navigation = "2.9.2"
-koinCore = "4.1.1"
-coilCompose = "3.3.0"
-koinAnnotations = "2.3.1"
+coilCompose = "3.6.0"
+koinCore = "4.2.2"
 adaptive = "1.2.0"
 multiplatformSettings = "1.3.0"
-filekit = "0.12.0"
+filekit = "0.15.0"
 
 #android
-androidx-activity = "1.12.4"
-kotlinx-coroutines = "1.10.2"
-firebaseBom = "34.9.0"
-googleServices = "4.4.4"
-firebaseCrashlytics = "3.0.6"
+androidx-activity = "1.13.0"
+kotlinx-coroutines = "1.11.0"
+firebaseBom = "34.18.0"
+googleServices = "4.5.0"
+firebaseCrashlytics = "3.0.8"
 
 #jvm
 mp3spi = "1.9.5.4"
@@ -54,8 +53,7 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCore" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel ", version.ref = "koinCore" }
-koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
-koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinAnnotations" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinCore" }
 
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
@@ -110,7 +108,7 @@ androidKmpLibrary = { id = "com.android.kotlin.multiplatform.library", version.r
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+compilerPlugin = { id = "io.insert-koin.compiler.plugin", version.ref = "koinCompilerPlugin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 #android
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
