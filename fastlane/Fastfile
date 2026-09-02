@@ -64,6 +64,12 @@ lane :setup_env do
   end
 end
 
+def artifact_version
+  name = ENV["GITHUB_REF_NAME"].to_s
+  name = "dev" if name.empty?
+  name.gsub(%r{[^A-Za-z0-9._-]}, "-")
+end
+
 # ---------- Android ----------
 platform :android do
   desc "Build APK (debug on branch, release on tag)"
@@ -73,7 +79,7 @@ platform :android do
     gradle_task = is_tag ? "assembleDefaultRelease" : "assembleDefaultDebug"
     gradlew gradle_task
 
-    version = ENV["GITHUB_REF_NAME"] || "dev"
+    version = artifact_version
     apk_file = if is_tag
                  Dir["../androidApp/build/outputs/apk/default/release/*.apk"].first
                else
@@ -123,7 +129,7 @@ platform :wasm do
     FileUtils.rm_f(zip_file)
     zip_directory(wasm_dir, zip_file)
 
-    version = ENV["GITHUB_REF_NAME"] || "dev"
+    version = artifact_version
     final_name = "../quran-app-#{version}.zip"
     FileUtils.mv(zip_file, final_name)
     UI.success("✅ Renamed WASM bundle to #{final_name}")
