@@ -8,33 +8,32 @@ android-compileSdk = "37"
 android-minSdk = "24"
 android-targetSdk = "37"
 #plugins
-agp = "9.4.0" #
-kotlin = "2.4.10"
-composeMultiplatform = "1.12.0"
-kotlinSerialization = "2.4.10"
-koinCompilerPlugin = "1.1.0"
+agp = "9.4.1" #
+kotlin = "2.4.21"
+composeMultiplatform = "1.12.2"
+koinCompilerPlugin = "1.2.3"
 #common
 compose-material3 = "1.9.0"
 compose-material-icons = "1.7.3"
 foundation = "1.10.1"
-ktorClientCore = "3.5.2"
-media3Exoplayer = "1.11.0"
-okio = "3.18.1"
-serialization-json = "1.11.0"
+ktorClientCore = "3.6.1"
+media3Exoplayer = "1.11.1"
+okio = "3.18.2"
+serialization-json = "1.13.0"
 kotlinxDatetime = "0.8.0"
 androidx-lifecycle = "2.11.0"
-androidx-navigation = "2.9.2"
-coilCompose = "3.6.0"
+androidx-navigation = "2.10.0"
+coilCompose = "3.6.3"
 koinCore = "4.2.2"
-adaptive = "1.2.0"
+adaptive = "1.3.0"
 multiplatformSettings = "1.3.0"
-filekit = "0.15.0"
+filekit = "0.17.1"
 
 #android
 androidx-activity = "1.13.0"
 kotlinx-coroutines = "1.11.0"
-firebaseBom = "34.18.0"
-googleServices = "4.5.0"
+firebaseBom = "35.2.0"
+googleServices = "4.6.0"
 firebaseCrashlytics = "3.0.8"
 
 #jvm
@@ -109,7 +108,7 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compilerPlugin = { id = "io.insert-koin.compiler.plugin", version.ref = "koinCompilerPlugin" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 #android
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
