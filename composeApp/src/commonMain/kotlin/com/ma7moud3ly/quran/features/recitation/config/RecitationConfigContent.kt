@@ -627,7 +627,7 @@ private fun SectionTvBackground(
         if (background != null) ItemBackground(
             modifier = Modifier.size(width = 85.dp, height = 100.dp),
             tvBackground = background,
-            static = false,
+            static = LocalPlatform.current.isWasmJs,
             onClick = onPickTvBackground
         ) else AddItemButton(
             text = Res.string.settings_tv_bg_add,
@@ -668,7 +668,6 @@ private fun Footer(
     enabled: () -> Boolean = { true },
     onStart: (ScreenMode) -> Unit
 ) {
-    val platform = LocalPlatform.current
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -677,41 +676,32 @@ private fun Footer(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (platform.isWasmJs) {
+        if (isCompactDevice()) Text(
+            text = stringResource(Res.string.recite_start),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onPrimary,
+            modifier = Modifier.padding(start = 8.dp)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.CenterHorizontally
+            ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             MyButton(
-                text = Res.string.recite_start,
-                modifier = Modifier.fillMaxWidth(0.5f),
+                text = Res.string.recite_mode_normal,
+                modifier = Modifier,
                 onClick = { onStart(ScreenMode.Normal) },
                 enabled = enabled
             )
-        } else {
-            if (isCompactDevice()) Text(
-                text = stringResource(Res.string.recite_start),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(start = 8.dp)
+            MyButton(
+                text = Res.string.recite_mode_tv,
+                modifier = Modifier,
+                onClick = { onStart(ScreenMode.Tv) },
+                enabled = enabled
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 8.dp,
-                    alignment = Alignment.CenterHorizontally
-                ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                MyButton(
-                    text = Res.string.recite_mode_normal,
-                    modifier = Modifier,
-                    onClick = { onStart(ScreenMode.Normal) },
-                    enabled = enabled
-                )
-                MyButton(
-                    text = Res.string.recite_mode_tv,
-                    modifier = Modifier,
-                    onClick = { onStart(ScreenMode.Tv) },
-                    enabled = enabled
-                )
-            }
         }
     }
 }
